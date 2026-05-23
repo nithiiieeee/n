@@ -13,8 +13,8 @@ const FACTORY_DEFAULTS = {
   username: "guest",
   heading: "nithiiieeee",
   quote: `“You are <span class="highlight-red">free</span><br>as long as<br>you realise it”`,
-  photo: "dp.jpg",
-  favicon: "dp.jpg",
+  photo: "dp.png",
+  favicon: "dp.png",
 };
 
 let currentUser =
