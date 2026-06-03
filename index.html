@@ -2,140 +2,986 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="site-tab-title">nithiiieeee</title>
-    <link id="site-tab-favicon" rel="icon" type="image/jpeg" href="nagi.jpg" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="nithiiieeee" />
     <meta
-      property="og:description"
-      content="Get in and see what's here eh !?"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <meta property="og:image" content="nagi.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="nithiiieeee" />
-    <meta
-      name="twitter:description"
-      content="Brooo.... Opening this from X is the worst !"
-    />
-    <meta name="twitter:image" content="nagi.jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Boldonse&family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
+    <title>nithiiieeee</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #0a0a0a;
+        --surface: #141414;
+        --elevated: #1e1e1e;
+        --text-primary: #f0f0ee;
+        --text-secondary: #b0b0ac;
+        --text-muted: #70706d;
+        --border-subtle: #2a2a28;
+        --border-default: #40403d;
+        --border-strong: #60605d;
+        --accent: #e8e8e5;
+        --accent-hover: #c0c0bc;
+        --overlay: rgba(10, 10, 10, 0.8);
+        --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+        --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.5);
+        --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.6);
+        --shadow-xl: 0 32px 80px rgba(0, 0, 0, 0.7);
+        --radius-sm: 8px;
+        --radius-md: 16px;
+        --radius-lg: 24px;
+        --radius-xl: 32px;
+        --transition: 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+        --transition-fast: 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text-primary);
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+      }
+
+      img,
+      svg[class*="image"],
+      .image-placeholder {
+        filter: grayscale(100%) contrast(1.1) brightness(0.9);
+      }
+
+      .container {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        width: 100%;
+      }
+
+      /* ========== NAVIGATION ========== */
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--overlay);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-subtle);
+        width: 100%;
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: var(--text-primary);
+        flex-shrink: 0;
+        padding: 10px;
+      }
+
+      .nav-logo {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        background: var(--accent);
+        border-radius: 50%;
+        background-image: url("dp.png");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .nav-brand-text {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .search-wrap {
+        position: relative;
+        width: 100%;
+      }
+
+      .search-input {
+        background: var(--surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: 50px;
+        padding: 0.6rem 1rem 0.6rem 2.4rem;
+        font-size: 0.85rem;
+        color: var(--text-primary);
+        outline: none;
+        width: 180px;
+        transition: all var(--transition-fast);
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+      }
+
+      .search-input:focus {
+        width: 220px;
+        border-color: var(--border-default);
+        background: var(--elevated);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 0.8rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      /* ========== HERO ========== */
+      .hero-section {
+        padding: clamp(2rem, 5vw, 5rem) 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(1.5rem, 4vw, 4rem);
+        align-items: center;
+      }
+
+      .hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(1rem, 2vw, 1.5rem);
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--elevated);
+        border: 1px solid var(--border-subtle);
+        border-radius: 50px;
+        padding: 0.4rem 1rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-secondary);
+        width: fit-content;
+      }
+
+      .hero-badge-dot {
+        width: 6px;
+        height: 6px;
+        background: #ff0000;
+        filter: none;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      .hero-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2rem, 5.5vw, 4.5rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+      }
+
+      .hero-title span {
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .hero-text {
+        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+        color: var(--text-secondary);
+        line-height: 1.7;
+        font-weight: 400;
+        max-width: 460px;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 0.8rem;
+        margin-top: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: var(--bg);
+        border: none;
+        padding: 0.75rem 1.8rem;
+        border-radius: 50px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .btn-primary:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--text-primary);
+        border: 1px solid var(--border-default);
+        padding: 0.75rem 1.8rem;
+        border-radius: 50px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        white-space: nowrap;
+      }
+
+      .btn-outline:hover {
+        border-color: var(--border-strong);
+        background: var(--surface);
+      }
+
+      .hero-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .hero-image-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: clamp(0.5rem, 1vw, 1rem);
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .hero-img-large {
+        grid-row: span 2;
+        background: var(--elevated);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        aspect-ratio: 3/4;
+        border: 1px solid var(--border-subtle);
+      }
+
+      .hero-img-small {
+        background: var(--elevated);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        aspect-ratio: 4/3;
+        border: 1px solid var(--border-subtle);
+      }
+
+      .image-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          var(--elevated) 0%,
+          var(--surface) 100%
+        );
+        font-size: clamp(1.5rem, 3vw, 3rem);
+        font-weight: 100;
+        color: var(--border-default);
+      }
+
+      /* ========== STATS BAR ========== */
+      .stats-bar {
+        display: none;
+      }
+
+      /* ========== PROJECTS ========== */
+      .section-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .section-title-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .section-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.5rem, 3vw, 2.2rem);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(1rem, 2vw, 2rem);
+        margin-bottom: clamp(2rem, 4vw, 5rem);
+      }
+
+      .project-card {
+        background: var(--surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        transition: all var(--transition);
+        cursor: pointer;
+      }
+
+      .project-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--border-default);
+      }
+
+      .card-image {
+        width: 100%;
+        aspect-ratio: 16/10;
+        overflow: hidden;
+        background: var(--elevated);
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      .card-image .image-placeholder {
+        font-size: clamp(2rem, 4vw, 4rem);
+        background: repeating-linear-gradient(
+          45deg,
+          var(--elevated),
+          var(--elevated) 10px,
+          var(--surface) 10px,
+          var(--surface) 20px
+        );
+      }
+
+      .card-body {
+        padding: clamp(1rem, 2vw, 1.8rem);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .card-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .card-category {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      .card-year {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .card-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+      }
+
+      .card-description {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        font-weight: 400;
+      }
+
+      .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 0.2rem;
+      }
+
+      .tag {
+        font-size: 0.65rem;
+        padding: 0.25rem 0.7rem;
+        border: 1px solid var(--border-subtle);
+        border-radius: 50px;
+        color: var(--text-secondary);
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        transition: all var(--transition-fast);
+      }
+
+      .project-card:hover .tag {
+        border-color: var(--border-default);
+        background: var(--elevated);
+      }
+
+      .no-results {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: clamp(2rem, 5vw, 5rem) 1.5rem;
+        background: var(--surface);
+        border-radius: var(--radius-xl);
+        border: 2px dashed var(--border-default);
+        color: var(--text-muted);
+        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+        font-weight: 400;
+      }
+
+      /* ========== CTA SECTION ========== */
+      .cta-section {
+        background: var(--elevated);
+        border-radius: var(--radius-xl);
+        padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 3vw, 4rem);
+        text-align: center;
+        margin-bottom: clamp(2rem, 4vw, 4rem);
+        border: 1px solid var(--border-subtle);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle at center,
+          var(--border-subtle) 0%,
+          transparent 70%
+        );
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .cta-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        position: relative;
+        margin-bottom: 0.8rem;
+      }
+
+      .cta-text {
+        font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+        color: var(--text-secondary);
+        position: relative;
+        margin-bottom: 1.5rem;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* ========== FOOTER ========== */
+      .footer {
+        padding: clamp(1.5rem, 3vw, 3rem) 0;
+        border-top: 1px solid var(--border-subtle);
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+        width: 100%;
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 20px;
+      }
+
+      /* ========== RESPONSIVE ========== */
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 1rem;
+        }
+
+        .navbar {
+          padding: 0.8rem 1rem;
+        }
+
+        .hero-section {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+          padding: 2rem 0;
+        }
+
+        .hero-image-grid {
+          max-width: 100%;
+          order: -1;
+        }
+
+        .hero-visual {
+          order: -1;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .search-input {
+          width: 140px;
+          font-size: 0.8rem;
+        }
+
+        .search-input:focus {
+          width: 160px;
+        }
+
+        .btn-primary,
+        .btn-outline {
+          padding: 0.65rem 1.4rem;
+          font-size: 0.8rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .navbar {
+          padding: 0.7rem 0.8rem;
+        }
+
+        .nav-brand {
+          gap: 0.5rem;
+        }
+
+        .nav-logo {
+          width: 28px;
+          height: 28px;
+          min-width: 28px;
+        }
+
+        .search-input {
+          width: 120px;
+          padding: 0.5rem 0.8rem 0.5rem 2rem;
+          font-size: 0.75rem;
+        }
+
+        .search-input:focus {
+          width: 140px;
+        }
+
+        .search-icon {
+          left: 0.6rem;
+          width: 14px;
+          height: 14px;
+        }
+
+        .hero-cta {
+          flex-direction: column;
+          gap: 0.6rem;
+        }
+
+        .btn-primary,
+        .btn-outline {
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      .search-highlight {
+        background: #555;
+        color: #fff;
+        padding: 0 2px;
+        border-radius: 2px;
+      }
+      ::selection {
+        background: #555;
+        color: #fff;
+        padding: 0 2px;
+        border-radius: 2px;
+      }
+      .hero-badge:hover {
+        opacity: 0.8;
+      }
+
+      .nav-brand-text:hover {
+        font-style: italic;
+        transition: font-style 0.2s ease;
+      }
+
+      .hero-badge:hover .hero-badge-dot {
+        animation: none;
+        opacity: 0.2;
+      }
+      .nav-brand-text.blinking {
+        animation: blinkRed 1.5s infinite;
+      }
+
+      @keyframes blinkRed {
+        0%,
+        100% {
+          color: var(--text-primary);
+        }
+        50% {
+          color: #555;
+        }
+      }
+
+      .emoji-bw {
+        filter: grayscale(100%) contrast(1.2);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    </style>
   </head>
   <body>
-    <header class="site-header">
-      <h1 class="logo site-logo-text">nithiiieeee</h1>
-      <div class="profile-container">
-        <img src="nagi.jpg" alt="nithiiieeee" class="profile-pic" />
+    <nav class="navbar">
+      <a href="#" class="nav-brand">
+        <div class="nav-logo"></div>
+        <span class="nav-brand-text">nithiiieeee</span>
+      </a>
+      <div class="nav-actions">
+        <div class="search-wrap">
+          <svg
+            class="search-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            type="search"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search work..."
+            autocomplete="off"
+          />
+        </div>
       </div>
-      <input
-        type="file"
-        id="terminal-file-uploader"
-        accept="image/*"
-        style="display: none"
-      />
-    </header>
+    </nav>
 
-    <main class="content">
-      <section class="intro-section">
-        <h2 class="hero-quote">
-          “You are <span class="highlight-red">free</span><br />
-          as long as<br />
-          you realise it”
-        </h2>
-
-        <details class="about-collapse">
-          <summary class="about-heading">
-            <span class="arrow">&gt;</span> About me
-          </summary>
-          <div class="about-content">
-            <p>
-              Hello... My name is Nithin Das and I am the creator of this
-              website. I am from Kerala and I love trying out random things when
-              I am bored which is how I learned coding. I like to do a lot of
-              things and is average in almost everything I do therefore making
-              my favourite quote :<br /><br />Jack of all trades,<br />Master of
-              none.<br />...
-            </p>
+    <div class="container">
+      <section class="hero-section">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            JustABoy
           </div>
-        </details>
-
-        <details class="about-collapse works-collapse">
-          <summary class="about-heading">
-            <span class="arrow">&gt;</span> My works
-          </summary>
-          <div class="about-content">
-            <p class="works-intro">Things I have built till this moment.</p>
-            <div class="projects-list">
-              <div class="project-item">
-                <a href="https://sigint-cmd.netlify.app" target="_blank" class="project-link">
-                  SIGINT-CMD <span class="link-arrow">↗</span>
-                </a>
-                <p class="project-desc">A secret military-like organization with every man for himself concept.</p><br><br>
-              </div>
+          <h1 class="hero-title">A person who <span>thinks</span></h1>
+          <p class="hero-text" id="heroText">
+            Doing things that replaces boredom with wonder.
+          </p>
+          <div class="hero-cta">
+            <button class="btn-primary">#2</button>
+            <button class="btn-outline"><span class="emoji-bw">🐇🥚</span></button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-image-grid">
+            <div class="hero-img-large">
+              <img
+                src="https://www.shutterstock.com/image-photo/serenity-summer-day-durmitor-national-600nw-2623341111.jpg"
+                alt="Hero"
+                class="hero-img"
+                onerror="this.style.display = 'none'"
+              />
+              <div class="image-placeholder">◈</div>
+            </div>
+            <div class="hero-img-small">
+              <img
+                src="https://static01.nyt.com/images/2012/02/12/magazine/12wmt/12wmt-articleLarge-v5.jpg?quality=75&auto=webp&disable=upscale"
+                alt="Hero"
+                class="hero-img"
+                onerror="this.style.display = 'none'"
+              />
+              <div class="image-placeholder">◉</div>
+            </div>
+            <div class="hero-img-small">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXQeddPi1ZsF_C99HZY8SKRiIAz1jm8dA7hg&s"
+                alt="Hero"
+                class="hero-img"
+                onerror="this.style.display = 'none'"
+              />
+              <div class="image-placeholder">◐</div>
             </div>
           </div>
-        </details>
-
-        <details class="about-collapse contact-collapse">
-          <summary class="about-heading">
-            <span class="arrow">&gt;</span> Contact
-          </summary>
-          <div class="about-content">
-            <div class="contact-links-container">
-              <a href="mailto:dreadful-had-rake@duck.com" class="contact-text-link">mail</a>
-              <span class="contact-divider">/</span>
-              <a href="https://instagram.com/nithiiieeee" target="_blank" rel="noopener noreferrer" class="contact-text-link">insta</a>
-            </div>
-          </div>
-        </details>
-
-        <details class="about-collapse terminal-collapse">
-          <summary class="about-heading">
-            <span class="arrow">&gt;</span> Terminal
-          </summary>
-          <div class="about-content">
-            <div class="terminal-window">
-              <div class="terminal-header">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
-                <span class="terminal-title"
-                  ><span class="user-prefix">guest</span>@nithiiieeee:~</span
-                >
-              </div>
-
-              <div class="terminal-body">
-                <div class="terminal-output">
-                  <p class="system-msg">Welcome to nithiiieeee OS v1.0.0</p>
-                  <p class="system-msg text-muted">
-                    Type 'help' to see available commands.
-                  </p>
-                </div>
-
-                <div class="terminal-input-line">
-                  <span class="terminal-prompt"
-                    ><span class="user-prefix">guest</span>@nithiiieeee:~$</span
-                  >
-                  <input
-                    type="text"
-                    class="terminal-input"
-                    autofocus
-                    autocomplete="off"
-                    spellcheck="false"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </details>
+        </div>
       </section>
-    </main>
-    <script src="script.js"></script>
+
+      <section>
+        <div class="section-header">
+          <div class="section-title-group">
+            <span class="section-label">Portfolio</span>
+            <h2 class="section-title">Selected Works</h2>
+          </div>
+        </div>
+        <div class="projects-grid" id="projectsGrid">
+          <div
+            class="project-card"
+            data-search=""
+            data-link=""
+          >
+            <div class="card-image">
+              <div class="image-placeholder">◈</div>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span class="card-category">title</span>
+                <span class="card-year">yyyy</span>
+              </div>
+              <h3 class="card-title">Empty for now :)</h3>
+              <p class="card-description">
+                description
+              </p>
+              <div class="card-tags">
+                <span class="tag">tag1</span>
+                <span class="tag">tag2</span>
+                <span class="tag">tag3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <h2 class="cta-title">Get in Touch</h2>
+        <p class="cta-text">
+          Interested in collaborating or just want to say hi ? Feel free to reach
+          out.
+        </p>
+        <a href="mailto:dreadful-had-rake@duck.com" class="btn-primary"
+          >Contact</a
+        >
+      </section>
+    </div>
+
+    <footer class="footer container">
+      <div class="footer-bottom">
+        <span><a href="https://en.wikipedia.org/wiki/Copyright_symbol" target="_blank">©</a> <a href="https://en.wikipedia.org/wiki/2026" target="_blank">2026</a> <a href="https://instagram.com/nithiiieeee" target="_blank">nithiiieeee</a></span>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        const cards = document.querySelectorAll(".project-card");
+        const grid = document.getElementById("projectsGrid");
+
+        // Click handler for project cards
+        cards.forEach(function (card) {
+          card.addEventListener("click", function () {
+            const link = card.getAttribute("data-link");
+            if (link) {
+              window.open(link, "_blank");
+            }
+          });
+        });
+
+        // Shared audio state
+        let currentAudio = null;
+        let currentIsPlaying = false;
+
+        function toggleAudio(audioSrc) {
+          const brandText = document.querySelector(".nav-brand-text");
+
+          // If same source is playing, toggle pause/play
+          if (currentAudio && currentAudio.src.includes(audioSrc)) {
+            if (currentIsPlaying) {
+              currentAudio.pause();
+              currentIsPlaying = false;
+              // Remove blink
+              if (audioSrc.includes("justaboy")) {
+                brandText.classList.remove("blinking");
+              }
+            } else {
+              currentAudio.play().catch(function () {});
+              currentIsPlaying = true;
+              if (audioSrc.includes("justaboy")) {
+                brandText.classList.add("blinking");
+              }
+            }
+            return;
+          }
+
+          // Stop whatever is currently playing
+          if (currentAudio) {
+            currentAudio.pause();
+            brandText.classList.remove("blinking");
+          }
+
+          // Start new audio
+          currentAudio = new Audio(audioSrc);
+          currentAudio.play().catch(function () {});
+          currentIsPlaying = true;
+
+          // Add blink if justaboy is playing
+          if (audioSrc.includes("justaboy")) {
+            brandText.classList.add("blinking");
+          }
+        }
+
+        // Play/pause "justaboy.mp3" when clicking badge
+        const badge = document.querySelector(".hero-badge");
+        if (badge) {
+          badge.style.cursor = "pointer";
+          badge.addEventListener("click", function () {
+            toggleAudio("justaboy.mp3");
+          });
+        }
+
+        // Play/pause "lettheworldburn.mp3" when clicking brand text
+        const brandText = document.querySelector(".nav-brand-text");
+        if (brandText) {
+          brandText.style.cursor = "pointer";
+          brandText.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleAudio("lettheworldburn.mp3");
+          });
+        }
+
+        // Hover to reveal Easter egg hint
+        const heroText = document.getElementById("heroText");
+        const originalText = heroText.textContent;
+        const secretText =
+          "There are 2 easter eggs in this website. Find them.";
+
+        heroText.addEventListener("mouseenter", function () {
+          heroText.textContent = secretText;
+          heroText.style.color = "#555";
+          heroText.style.transition = "color 0.3s ease";
+        });
+
+        heroText.addEventListener("mouseleave", function () {
+          heroText.textContent = originalText;
+          heroText.style.color = "";
+        });
+
+        function clearHighlights() {
+          document.querySelectorAll(".search-highlight").forEach(function (el) {
+            const parent = el.parentNode;
+            parent.replaceChild(document.createTextNode(el.textContent), el);
+            parent.normalize();
+          });
+        }
+
+        function highlightInElement(el, query) {
+          if (!query) return;
+          const regex = new RegExp(
+            "(" + query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")",
+            "gi",
+          );
+          el.innerHTML = el.innerHTML.replace(
+            regex,
+            '<mark class="search-highlight">$1</mark>',
+          );
+        }
+
+        searchInput.addEventListener("input", function () {
+          const q = searchInput.value.toLowerCase().trim();
+          clearHighlights();
+          let visibleCount = 0;
+
+          cards.forEach(function (card) {
+            const searchData = card.getAttribute("data-search");
+            if (!searchData) return;
+
+            if (!q || searchData.toLowerCase().includes(q)) {
+              card.style.display = "";
+              visibleCount++;
+
+              if (q) {
+                const title = card.querySelector(".card-title");
+                const desc = card.querySelector(".card-description");
+                const category = card.querySelector(".card-category");
+                const tags = card.querySelectorAll(".tag");
+
+                highlightInElement(title, q);
+                highlightInElement(desc, q);
+                highlightInElement(category, q);
+                tags.forEach(function (tag) {
+                  highlightInElement(tag, q);
+                });
+              }
+            } else {
+              card.style.display = "none";
+            }
+          });
+
+          let noResults = grid.querySelector(".no-results");
+          if (visibleCount === 0 && q) {
+            if (!noResults) {
+              noResults = document.createElement("div");
+              noResults.className = "no-results";
+              noResults.textContent = "No projects match your search.";
+              grid.appendChild(noResults);
+            }
+          } else if (noResults) {
+            noResults.remove();
+          }
+        });
+      });
+    </script>
   </body>
 </html>
