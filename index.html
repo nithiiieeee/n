@@ -58,7 +58,31 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         overflow-x: hidden;
-        cursor: wait;
+        cursor: none;
+      }
+
+      .cursor-dot {
+        position: fixed;
+        width: 12px;
+        height: 12px;
+        background: #ffffff;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: difference;
+        transition:
+          width 0.15s ease,
+          height 0.15s ease;
+      }
+
+      @media (max-width: 768px) {
+        .cursor-dot {
+          display: none;
+        }
+        body {
+          cursor: auto;
+        }
       }
 
       img,
@@ -98,7 +122,7 @@
         color: var(--text-primary);
         flex-shrink: 0;
         padding: 10px;
-        cursor: wait;
+        cursor: none;
       }
 
       .nav-logo {
@@ -117,7 +141,7 @@
         font-size: clamp(1.1rem, 2vw, 1.4rem);
         font-weight: 600;
         letter-spacing: -0.02em;
-        cursor: wait;
+        cursor: none;
       }
 
       .nav-actions {
@@ -190,7 +214,7 @@
         letter-spacing: 0.1em;
         color: var(--text-secondary);
         width: fit-content;
-        cursor: wait;
+        cursor: none;
       }
 
       .hero-badge-dot {
@@ -200,7 +224,7 @@
         filter: none;
         border-radius: 50%;
         animation: pulse 2s infinite;
-        cursor: wait;
+        cursor: none;
       }
 
       @keyframes pulse {
@@ -250,7 +274,7 @@
         font-family: "Inter", sans-serif;
         font-size: 0.85rem;
         font-weight: 600;
-        cursor: wait;
+        cursor: none;
         transition: all var(--transition-fast);
         letter-spacing: 0.02em;
         white-space: nowrap;
@@ -274,7 +298,7 @@
         font-family: "Inter", sans-serif;
         font-size: 0.85rem;
         font-weight: 500;
-        cursor: wait;
+        cursor: none;
         transition: all var(--transition-fast);
         white-space: nowrap;
       }
@@ -309,7 +333,15 @@
         border: 1px solid var(--border-subtle);
       }
 
-      .hero-img-small {
+      .hero-img-ocean {
+        background: var(--elevated);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        aspect-ratio: 4/3;
+        border: 1px solid var(--border-subtle);
+      }
+
+      .hero-img-car {
         background: var(--elevated);
         border-radius: var(--radius-md);
         overflow: hidden;
@@ -382,7 +414,7 @@
         border-radius: var(--radius-xl);
         overflow: hidden;
         transition: all var(--transition);
-        cursor: wait;
+        cursor: none;
       }
 
       .project-card:hover {
@@ -609,7 +641,7 @@
 
         .nav-brand {
           gap: 0.5rem;
-          cursor: wait;
+          cursor: none;
         }
 
         .nav-logo {
@@ -665,13 +697,13 @@
       .nav-brand-text:hover {
         font-style: italic;
         transition: font-style 0.2s ease;
-        cursor: wait;
+        cursor: none;
       }
 
       .hero-badge:hover .hero-badge-dot {
         animation: none;
         opacity: 0.2;
-        cursor: wait;
+        cursor: none;
       }
       .nav-brand-text.blinking {
         animation: blinkRed 1.5s infinite;
@@ -694,11 +726,12 @@
       a {
         color: inherit;
         text-decoration: none;
-        cursor: wait;
+        cursor: none;
       }
     </style>
   </head>
   <body>
+    <div class="cursor-dot"></div>
     <nav class="navbar">
       <a href="#" class="nav-brand">
         <div class="nav-logo"></div>
@@ -741,8 +774,10 @@
             Doing things that replaces boredom with wonder.
           </p>
           <div class="hero-cta">
-            <button class="btn-primary">#2</button>
-            <button class="btn-outline"><span class="emoji-bw">🐇🥚</span></button>
+            <button class="btn-primary">. . .</button>
+            <button class="btn-outline">
+              <span class="emoji-bw">+</span>
+            </button>
           </div>
         </div>
         <div class="hero-visual">
@@ -757,7 +792,7 @@
               />
               <div class="image-placeholder">◈</div>
             </div>
-            <div class="hero-img-small">
+            <div class="hero-img-ocean">
               <img
                 src="https://storage.needpix.com/rsynced_images/sea-1547609_1280.jpg"
                 height="100%"
@@ -767,7 +802,7 @@
               />
               <div class="image-placeholder">◉</div>
             </div>
-            <div class="hero-img-small">
+            <div class="hero-img-car">
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXQeddPi1ZsF_C99HZY8SKRiIAz1jm8dA7hg&s"
                 height="100%"
@@ -789,11 +824,7 @@
           </div>
         </div>
         <div class="projects-grid" id="projectsGrid">
-          <div
-            class="project-card"
-            data-search=""
-            data-link=""
-          >
+          <div class="project-card" data-search="" data-link="">
             <div class="card-image">
               <div class="image-placeholder">◈</div>
             </div>
@@ -803,9 +834,7 @@
                 <span class="card-year">yyyy</span>
               </div>
               <h3 class="card-title">Empty for now :)</h3>
-              <p class="card-description">
-                description
-              </p>
+              <p class="card-description">description</p>
               <div class="card-tags">
                 <span class="tag">tag1</span>
                 <span class="tag">tag2</span>
@@ -819,8 +848,8 @@
       <section class="cta-section">
         <h2 class="cta-title">Get in Touch</h2>
         <p class="cta-text">
-          Interested in collaborating or just want to say hi ? Feel free to reach
-          out.
+          Interested in collaborating or just want to say hi ? Feel free to
+          reach out.
         </p>
         <a href="mailto:dreadful-had-rake@duck.com" class="btn-primary"
           >Contact</a
@@ -830,7 +859,17 @@
 
     <footer class="footer container">
       <div class="footer-bottom">
-        <span><a href="https://en.wikipedia.org/wiki/Copyright_symbol" target="_blank">©</a> <a href="https://en.wikipedia.org/wiki/2026" target="_blank">2026</a> <a href="https://instagram.com/nithiiieeee" target="_blank">nithiiieeee</a></span>
+        <span
+          ><a
+            href="https://en.wikipedia.org/wiki/Copyright_symbol"
+            target="_blank"
+            >©</a
+          >
+          <a href="https://en.wikipedia.org/wiki/2026" target="_blank">2026</a>
+          <a href="https://instagram.com/nithiiieeee" target="_blank"
+            >nithiiieeee</a
+          ></span
+        >
       </div>
     </footer>
 
@@ -850,66 +889,139 @@
           });
         });
 
-        // Shared audio state
-        let currentAudio = null;
-        let currentIsPlaying = false;
+        // Ocean box setup
+        const oceanBox = document.querySelector(".hero-img-ocean");
+        const oceanBoxOriginalHTML = oceanBox ? oceanBox.innerHTML : "";
+        let oceanVideoMode = false;
+        let oceanVideoElement = null;
 
-        function toggleAudio(audioSrc) {
-          const brandText = document.querySelector(".nav-brand-text");
-
-          // If same source is playing, toggle pause/play
-          if (currentAudio && currentAudio.src.includes(audioSrc)) {
-            if (currentIsPlaying) {
-              currentAudio.pause();
-              currentIsPlaying = false;
-              // Remove blink
-              if (audioSrc.includes("justaboy")) {
-                brandText.classList.remove("blinking");
-              }
-            } else {
-              currentAudio.play().catch(function () {});
-              currentIsPlaying = true;
-              if (audioSrc.includes("justaboy")) {
-                brandText.classList.add("blinking");
-              }
-            }
-            return;
+        function exitOceanVideoMode() {
+          if (oceanVideoElement) {
+            oceanVideoElement.pause();
+            oceanVideoElement.remove();
+            oceanVideoElement = null;
           }
-
-          // Stop whatever is currently playing
-          if (currentAudio) {
-            currentAudio.pause();
-            brandText.classList.remove("blinking");
-          }
-
-          // Start new audio
-          currentAudio = new Audio(audioSrc);
-          currentAudio.play().catch(function () {});
-          currentIsPlaying = true;
-
-          // Add blink if justaboy is playing
-          if (audioSrc.includes("justaboy")) {
-            brandText.classList.add("blinking");
-          }
+          if (oceanBox) oceanBox.innerHTML = oceanBoxOriginalHTML;
+          oceanVideoMode = false;
         }
 
-        // Play/pause "justaboy.mp3" when clicking badge
-        const badge = document.querySelector(".hero-badge");
-        if (badge) {
-          badge.style.cursor = "wait";
-          badge.addEventListener("click", function () {
-            toggleAudio("justaboy.mp3");
+        function enterOceanVideoMode() {
+          if (videoMode && videoElement) {
+            videoElement.pause();
+          }
+          if (!oceanBox) return;
+          oceanBox.innerHTML = "";
+          oceanVideoElement = document.createElement("video");
+          oceanVideoElement.src = "justaboy.mp4";
+          oceanVideoElement.style.width = "100%";
+          oceanVideoElement.style.height = "100%";
+          oceanVideoElement.style.objectFit = "cover";
+          oceanVideoElement.loop = false;
+          oceanVideoElement.playsInline = true;
+          oceanBox.appendChild(oceanVideoElement);
+          oceanVideoElement.play().catch(function () {});
+          oceanVideoMode = true;
+        }
+
+        // Car box setup
+        const carBox = document.querySelector(".hero-img-car");
+        const carBoxOriginalHTML = carBox ? carBox.innerHTML : "";
+        let videoMode = false;
+        let videoElement = null;
+
+        function exitVideoMode() {
+          if (videoElement) {
+            videoElement.pause();
+            videoElement.remove();
+            videoElement = null;
+          }
+          if (carBox) carBox.innerHTML = carBoxOriginalHTML;
+          videoMode = false;
+          const brandText = document.querySelector(".nav-brand-text");
+          if (brandText) brandText.classList.remove("blinking");
+        }
+
+        function enterVideoMode() {
+          if (oceanVideoMode && oceanVideoElement) {
+            oceanVideoElement.pause();
+          }
+          if (!carBox) return;
+          carBox.innerHTML = "";
+          videoElement = document.createElement("video");
+          videoElement.src = "lettheworldburn.mp4";
+          videoElement.style.width = "100%";
+          videoElement.style.height = "100%";
+          videoElement.style.objectFit = "cover";
+          videoElement.loop = false;
+          videoElement.playsInline = true;
+          carBox.appendChild(videoElement);
+          videoElement.play().catch(function () {});
+          videoMode = true;
+          const brandText = document.querySelector(".nav-brand-text");
+          if (brandText) brandText.classList.add("blinking");
+
+          videoElement.addEventListener("ended", function () {
+            if (brandText) brandText.classList.remove("blinking");
           });
         }
 
-        // Play/pause "lettheworldburn.mp3" when clicking brand text
+        // Large image (GIF) setup
+        const largeBox = document.querySelector(".hero-img-large");
+        const largeBoxOriginalHTML = largeBox ? largeBox.innerHTML : "";
+        let gifPlaying = false;
+
+        if (largeBox) {
+          largeBox.addEventListener("click", function (e) {
+            e.stopPropagation();
+            if (gifPlaying) return;
+
+            gifPlaying = true;
+            largeBox.innerHTML = "";
+            largeBox.style.position = "relative";
+            largeBox.style.overflow = "hidden";
+
+            const gifElement = document.createElement("img");
+            gifElement.src = "mr.bean.gif";
+            gifElement.style.width = "100%";
+            gifElement.style.height = "auto";
+            gifElement.style.position = "absolute";
+            gifElement.style.top = "0";
+            gifElement.style.left = "0";
+            largeBox.appendChild(gifElement);
+
+            const gifDuration = 3000;
+            setTimeout(function () {
+              largeBox.innerHTML = largeBoxOriginalHTML;
+              largeBox.style.position = "";
+              largeBox.style.overflow = "";
+              gifPlaying = false;
+            }, gifDuration);
+          });
+        }
+
+        // Badge click - toggles ocean video mode
+        const badge = document.querySelector(".hero-badge");
+        if (badge) {
+          badge.addEventListener("click", function () {
+            if (oceanVideoMode) {
+              exitOceanVideoMode();
+            } else {
+              enterOceanVideoMode();
+            }
+          });
+        }
+
+        // Brand text click - toggles car video mode
         const brandText = document.querySelector(".nav-brand-text");
         if (brandText) {
-          brandText.style.cursor = "wait";
           brandText.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            toggleAudio("lettheworldburn.mp3");
+            if (videoMode) {
+              exitVideoMode();
+            } else {
+              enterVideoMode();
+            }
           });
         }
 
@@ -930,6 +1042,7 @@
           heroText.style.color = "";
         });
 
+        // Search functionality
         function clearHighlights() {
           document.querySelectorAll(".search-highlight").forEach(function (el) {
             const parent = el.parentNode;
@@ -992,6 +1105,86 @@
           } else if (noResults) {
             noResults.remove();
           }
+        });
+
+        // Custom cursor
+        document.addEventListener("mousemove", function (e) {
+          const dot = document.querySelector(".cursor-dot");
+          if (dot) {
+            dot.style.left = e.clientX + "px";
+            dot.style.top = e.clientY + "px";
+          }
+        });
+
+        // Whoosh sound on fast cursor movement
+        let lastX = 0,
+          lastY = 0,
+          lastTime = Date.now();
+        let whooshCooldown = false;
+
+        document.addEventListener("mousemove", function (e) {
+          const now = Date.now();
+          const dt = now - lastTime;
+          if (dt < 20) return;
+
+          const dx = e.clientX - lastX;
+          const dy = e.clientY - lastY;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const speed = distance / dt;
+
+          lastX = e.clientX;
+          lastY = e.clientY;
+          lastTime = now;
+
+          if (speed > 10 && !whooshCooldown) {
+            whooshCooldown = true;
+            const whoosh = new Audio("whoosh.mp3");
+            whoosh.volume = 1.0;
+            whoosh.play().catch(function () {});
+            setTimeout(function () {
+              whooshCooldown = false;
+            }, 200);
+          }
+        });
+
+        // Ocean box click
+        if (oceanBox) {
+          oceanBox.addEventListener("click", function (e) {
+            e.stopPropagation();
+            if (oceanVideoMode && oceanVideoElement) {
+              if (oceanVideoElement.paused) {
+                oceanVideoElement.play().catch(function () {});
+              } else {
+                oceanVideoElement.pause();
+              }
+            } else {
+              new Audio("ocean.mp3").play().catch(function () {});
+            }
+          });
+        }
+
+        // Car box click
+        if (carBox) {
+          carBox.addEventListener("click", function (e) {
+            e.stopPropagation();
+            if (videoMode && videoElement) {
+              if (videoElement.paused) {
+                videoElement.play().catch(function () {});
+              } else {
+                videoElement.pause();
+              }
+            } else {
+              new Audio("carstarting.mp3").play().catch(function () {});
+            }
+          });
+        }
+
+        // Click sound on everything else
+        document.addEventListener("click", function (e) {
+          if (carBox && carBox.contains(e.target)) return;
+          if (oceanBox && oceanBox.contains(e.target)) return;
+          if (largeBox && largeBox.contains(e.target)) return;
+          new Audio("click.mp3").play().catch(function () {});
         });
       });
     </script>
