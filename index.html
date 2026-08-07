@@ -1,1215 +1,1000 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
-    <title>nithiiieeee</title>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap");
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>nithiiieeee</title>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    if (localStorage.getItem("theme") === "light") {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  </script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap");
 
-      :root {
-        --bg: #0a0a0a;
-        --surface: #141414;
-        --elevated: #1e1e1e;
-        --text-primary: #f0f0ee;
-        --text-secondary: #b0b0ac;
-        --text-muted: #70706d;
-        --border-subtle: #2a2a28;
-        --border-default: #40403d;
-        --border-strong: #60605d;
-        --accent: #e8e8e5;
-        --accent-hover: #c0c0bc;
-        --overlay: rgba(10, 10, 10, 0.8);
-        --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.3);
-        --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
-        --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.5);
-        --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.6);
-        --shadow-xl: 0 32px 80px rgba(0, 0, 0, 0.7);
-        --radius-sm: 8px;
-        --radius-md: 16px;
-        --radius-lg: 24px;
-        --radius-xl: 32px;
-        --transition: 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
-        --transition-fast: 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
-      }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      html {
-        scroll-behavior: smooth;
+    :root {
+      --bg: #fbfbfa;
+      --surface: #f0eeeb;
+      --elevated: #e4e1de;
+      --text-primary: #4A3B32;
+      --text-secondary: #57534e;
+      --text-muted: #78716c;
+      --border-subtle: #d6d3d1;
+      --border-default: #a8a29e;
+      --border-strong: #78716c;
+      --accent: #4A3B32;
+      --accent-hover: #292524;
+      --overlay: rgba(251, 251, 250, 0.85);
+    }
+
+    [data-theme="light"] {
+      --bg: #0c0a09;
+      --surface: #1c1917;
+      --elevated: #292524;
+      --text-primary: #fafaf9;
+      --text-secondary: #d6d3d1;
+      --text-muted: #a8a29e;
+      --border-subtle: #44403c;
+      --border-default: #57534e;
+      --border-strong: #78716c;
+      --accent: #f5f5f4;
+      --accent-hover: #e7e5e4;
+      --overlay: rgba(12, 10, 9, 0.85);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .cursor-dot {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: difference;
+      transition:
+        width 0.15s ease,
+        height 0.15s ease;
+    }
+
+    @media (max-width: 768px) {
+      .cursor-dot {
+        display: none;
       }
 
       body {
-        background: var(--bg);
-        color: var(--text-primary);
-        font-family:
-          "Inter",
-          system-ui,
-          -apple-system,
-          sans-serif;
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        overflow-x: hidden;
-        cursor: none;
+        cursor: auto;
       }
+    }
 
-      .cursor-dot {
-        position: fixed;
-        width: 12px;
-        height: 12px;
-        background: #ffffff;
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        mix-blend-mode: difference;
-        transition:
-          width 0.15s ease,
-          height 0.15s ease;
+    img,
+    svg[class*="image"],
+    .image-placeholder {
+      filter: grayscale(0%) contrast(1.1) brightness(0.9);
+    }
+
+    /* Make all images fill their containers cleanly */
+    .hero-img,
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* ========== NAVIGATION ========== */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--overlay);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      width: 100%;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      flex-shrink: 0;
+      padding: 10px;
+      cursor: none;
+    }
+
+    .nav-logo {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      background: var(--accent);
+      border-radius: 50%;
+      background-image: url("dp.png");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .nav-brand-text {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      cursor: none;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .search-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      padding: 0.6rem 1rem 0.6rem 2.4rem;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      outline: none;
+      width: 180px;
+      transition: all var(--transition-fast);
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+    }
+
+    .search-input:focus {
+      width: 220px;
+      border-color: var(--border-default);
+      background: var(--elevated);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    /* ========== HERO ========== */
+    .hero-section {
+      padding: clamp(2rem, 5vw, 5rem) 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1.5rem, 4vw, 4rem);
+      align-items: center;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1rem, 2vw, 1.5rem);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      width: fit-content;
+      cursor: none;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: #ff0000;
+      filter: none;
+      border-radius: none;
+      animation: pulse 2s infinite;
+      cursor: none;
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        opacity: 1;
       }
-
-      @media (max-width: 768px) {
-        .cursor-dot {
-          display: none;
-        }
-        body {
-          cursor: auto;
-        }
+      50% {
+        opacity: 0.4;
       }
+    }
 
-      img,
-      svg[class*="image"],
-      .image-placeholder {
-        filter: grayscale(0%) contrast(1.1) brightness(0.9);
-      }
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 5.5vw, 4.5rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
 
+    .hero-title span {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-text {
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-weight: 400;
+      max-width: 460px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 0.75rem 1.8rem;
+      border-radius: 50px;
+      font-family: "Inter", sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: none;
+      transition: all var(--transition-fast);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-primary i {
+      font-size: 1.2rem;
+      vertical-align: middle;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+      padding: 0.75rem 1.8rem;
+      border-radius: 50px;
+      font-family: "Inter", sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: none;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--border-strong);
+      background: var(--surface);
+    }
+
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .hero-image-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: clamp(0.5rem, 1vw, 1rem);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .hero-img-large {
+      grid-row: span 2;
+      background: var(--elevated);
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .hero-img-ocean {
+      background: var(--elevated);
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .hero-img-car {
+      background: var(--elevated);
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg,
+          var(--elevated) 0%,
+          var(--surface) 100%);
+      font-size: clamp(1.5rem, 3vw, 3rem);
+      font-weight: 100;
+      color: var(--border-default);
+    }
+
+    /* ========== STATS BAR ========== */
+    .stats-bar {
+      display: none;
+    }
+
+    /* ========== PROJECTS ========== */
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: clamp(1rem, 2vw, 2rem);
+      margin-bottom: clamp(2rem, 4vw, 5rem);
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all var(--transition);
+      cursor: none;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--border-default);
+    }
+
+    .card-image {
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: var(--elevated);
+      border-bottom: 1px solid var(--border-subtle);
+      border-radius: 20px;
+    }
+
+    .card-image .image-placeholder {
+      font-size: clamp(2rem, 4vw, 4rem);
+      background: repeating-linear-gradient(45deg,
+          var(--elevated),
+          var(--elevated) 10px,
+          var(--surface) 10px,
+          var(--surface) 20px);
+    }
+
+    .card-body {
+      padding: clamp(1rem, 2vw, 1.8rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .card-category {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .card-year {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .card-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .card-description {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.2rem;
+    }
+
+    .tag {
+      font-size: 0.65rem;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: all var(--transition-fast);
+    }
+
+    .project-card:hover .tag {
+      border-color: var(--border-default);
+      background: var(--elevated);
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: clamp(2rem, 5vw, 5rem) 1.5rem;
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      border: 2px dashed var(--border-default);
+      color: var(--text-muted);
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      font-weight: 400;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta-section {
+      background: inherit;
+      border-radius: 50px;
+      padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 3vw, 4rem);
+      text-align: center;
+      margin-bottom: clamp(2rem, 4vw, 4rem);
+      border: 1px solid var(--border-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center,
+          var(--border-subtle) 0%,
+          transparent 70%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .cta-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      position: relative;
+      margin-bottom: 0.8rem;
+    }
+
+    .cta-text {
+      font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+      color: var(--text-secondary);
+      position: relative;
+      margin-bottom: 1.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: clamp(1.5rem, 3vw, 3rem) 0;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      width: 100%;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 20px;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
       .container {
-        max-width: 1320px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-        width: 100%;
+        padding: 0 1rem;
       }
 
-      /* ========== NAVIGATION ========== */
       .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem 1.5rem;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: var(--overlay);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border-subtle);
-        width: 100%;
+        padding: 0.8rem 1rem;
+      }
+
+      .hero-section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2rem 0;
+      }
+
+      .hero-image-grid {
+        max-width: 100%;
+        order: -1;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-input {
+        width: 140px;
+        font-size: 0.8rem;
+      }
+
+      .search-input:focus {
+        width: 160px;
+      }
+
+      .btn-primary,
+      .btn-outline {
+        padding: 0.65rem 1.4rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 0.7rem 0.8rem;
       }
 
       .nav-brand {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        text-decoration: none;
-        color: var(--text-primary);
-        flex-shrink: 0;
-        padding: 10px;
+        gap: 0.5rem;
         cursor: none;
       }
 
       .nav-logo {
-        width: 36px;
-        height: 36px;
-        min-width: 36px;
-        background: var(--accent);
-        border-radius: 50%;
-        background-image: url("dp.png");
-        background-size: cover;
-        background-position: center;
-      }
-
-      .nav-brand-text {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(1.1rem, 2vw, 1.4rem);
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        cursor: none;
-      }
-
-      .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .search-wrap {
-        position: relative;
-        width: 100%;
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
       }
 
       .search-input {
-        background: var(--surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: 50px;
-        padding: 0.6rem 1rem 0.6rem 2.4rem;
-        font-size: 0.85rem;
-        color: var(--text-primary);
-        outline: none;
-        width: 180px;
-        transition: all var(--transition-fast);
-        font-family: "Inter", sans-serif;
-        font-weight: 400;
+        width: 120px;
+        padding: 0.5rem 0.8rem 0.5rem 2rem;
+        font-size: 0.75rem;
       }
 
       .search-input:focus {
-        width: 220px;
-        border-color: var(--border-default);
-        background: var(--elevated);
-        box-shadow: var(--shadow-sm);
+        width: 140px;
       }
 
       .search-icon {
-        position: absolute;
-        left: 0.8rem;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-        opacity: 0.4;
-      }
-
-      /* ========== HERO ========== */
-      .hero-section {
-        padding: clamp(2rem, 5vw, 5rem) 0;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: clamp(1.5rem, 4vw, 4rem);
-        align-items: center;
-      }
-
-      .hero-content {
-        display: flex;
-        flex-direction: column;
-        gap: clamp(1rem, 2vw, 1.5rem);
-      }
-
-      .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: var(--elevated);
-        border: 1px solid var(--border-subtle);
-        border-radius: 50px;
-        padding: 0.4rem 1rem;
-        font-size: 0.7rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--text-secondary);
-        width: fit-content;
-        cursor: none;
-      }
-
-      .hero-badge-dot {
-        width: 6px;
-        height: 6px;
-        background: #ff0000;
-        filter: none;
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-        cursor: none;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.4;
-        }
-      }
-
-      .hero-title {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(2rem, 5.5vw, 4.5rem);
-        font-weight: 600;
-        letter-spacing: -0.03em;
-        line-height: 1.1;
-      }
-
-      .hero-title span {
-        font-style: italic;
-        font-weight: 400;
-      }
-
-      .hero-text {
-        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-        color: var(--text-secondary);
-        line-height: 1.7;
-        font-weight: 400;
-        max-width: 460px;
+        left: 0.6rem;
+        width: 14px;
+        height: 14px;
       }
 
       .hero-cta {
-        display: flex;
-        gap: 0.8rem;
-        margin-top: 0.5rem;
-        flex-wrap: wrap;
-      }
-
-      .btn-primary {
-        background: var(--accent);
-        color: var(--bg);
-        border: none;
-        padding: 0.75rem 1.8rem;
-        border-radius: 50px;
-        font-family: "Inter", sans-serif;
-        font-size: 0.85rem;
-        font-weight: 600;
-        cursor: none;
-        transition: all var(--transition-fast);
-        letter-spacing: 0.02em;
-        white-space: nowrap;
-        text-decoration: none;
-        display: inline-block;
-        text-align: center;
-      }
-
-      .btn-primary:hover {
-        background: var(--accent-hover);
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
-      }
-
-      .btn-outline {
-        background: transparent;
-        color: var(--text-primary);
-        border: 1px solid var(--border-default);
-        padding: 0.75rem 1.8rem;
-        border-radius: 50px;
-        font-family: "Inter", sans-serif;
-        font-size: 0.85rem;
-        font-weight: 500;
-        cursor: none;
-        transition: all var(--transition-fast);
-        white-space: nowrap;
-      }
-
-      .btn-outline:hover {
-        border-color: var(--border-strong);
-        background: var(--surface);
-      }
-
-      .hero-visual {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      }
-
-      .hero-image-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: clamp(0.5rem, 1vw, 1rem);
-        width: 100%;
-        max-width: 500px;
-      }
-
-      .hero-img-large {
-        grid-row: span 2;
-        background: var(--elevated);
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        aspect-ratio: 3/4;
-        border: 1px solid var(--border-subtle);
-      }
-
-      .hero-img-ocean {
-        background: var(--elevated);
-        border-radius: var(--radius-md);
-        overflow: hidden;
-        aspect-ratio: 4/3;
-        border: 1px solid var(--border-subtle);
-      }
-
-      .hero-img-car {
-        background: var(--elevated);
-        border-radius: var(--radius-md);
-        overflow: hidden;
-        aspect-ratio: 4/3;
-        border: 1px solid var(--border-subtle);
-      }
-
-      .image-placeholder {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(
-          135deg,
-          var(--elevated) 0%,
-          var(--surface) 100%
-        );
-        font-size: clamp(1.5rem, 3vw, 3rem);
-        font-weight: 100;
-        color: var(--border-default);
-      }
-
-      /* ========== STATS BAR ========== */
-      .stats-bar {
-        display: none;
-      }
-
-      /* ========== PROJECTS ========== */
-      .section-header {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-
-      .section-title-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-      }
-
-      .section-label {
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: var(--text-muted);
-        font-weight: 600;
-      }
-
-      .section-title {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(1.5rem, 3vw, 2.2rem);
-        font-weight: 600;
-        letter-spacing: -0.02em;
-      }
-
-      .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: clamp(1rem, 2vw, 2rem);
-        margin-bottom: clamp(2rem, 4vw, 5rem);
-      }
-
-      .project-card {
-        background: var(--surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-xl);
-        overflow: hidden;
-        transition: all var(--transition);
-        cursor: none;
-      }
-
-      .project-card:hover {
-        transform: translateY(-6px);
-        box-shadow: var(--shadow-xl);
-        border-color: var(--border-default);
-      }
-
-      .card-image {
-        width: 100%;
-        aspect-ratio: 16/10;
-        overflow: hidden;
-        background: var(--elevated);
-        border-bottom: 1px solid var(--border-subtle);
-      }
-
-      .card-image .image-placeholder {
-        font-size: clamp(2rem, 4vw, 4rem);
-        background: repeating-linear-gradient(
-          45deg,
-          var(--elevated),
-          var(--elevated) 10px,
-          var(--surface) 10px,
-          var(--surface) 20px
-        );
-      }
-
-      .card-body {
-        padding: clamp(1rem, 2vw, 1.8rem);
-        display: flex;
         flex-direction: column;
         gap: 0.6rem;
       }
 
-      .card-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
-
-      .card-category {
-        font-size: 0.65rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--text-muted);
-        font-weight: 600;
-      }
-
-      .card-year {
-        font-size: 0.75rem;
-        color: var(--text-muted);
-        font-weight: 500;
-      }
-
-      .card-title {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(1.1rem, 1.5vw, 1.4rem);
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        line-height: 1.3;
-      }
-
-      .card-description {
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        line-height: 1.6;
-        font-weight: 400;
-      }
-
-      .card-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        margin-top: 0.2rem;
-      }
-
-      .tag {
-        font-size: 0.65rem;
-        padding: 0.25rem 0.7rem;
-        border: 1px solid var(--border-subtle);
-        border-radius: 50px;
-        color: var(--text-secondary);
-        font-weight: 500;
-        letter-spacing: 0.03em;
-        transition: all var(--transition-fast);
-      }
-
-      .project-card:hover .tag {
-        border-color: var(--border-default);
-        background: var(--elevated);
-      }
-
-      .no-results {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: clamp(2rem, 5vw, 5rem) 1.5rem;
-        background: var(--surface);
-        border-radius: var(--radius-xl);
-        border: 2px dashed var(--border-default);
-        color: var(--text-muted);
-        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-        font-weight: 400;
-      }
-
-      /* ========== CTA SECTION ========== */
-      .cta-section {
-        background: var(--elevated);
-        border-radius: var(--radius-xl);
-        padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 3vw, 4rem);
-        text-align: center;
-        margin-bottom: clamp(2rem, 4vw, 4rem);
-        border: 1px solid var(--border-subtle);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .cta-section::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(
-          circle at center,
-          var(--border-subtle) 0%,
-          transparent 70%
-        );
-        opacity: 0.5;
-        pointer-events: none;
-      }
-
-      .cta-title {
-        font-family: "Playfair Display", serif;
-        font-size: clamp(1.5rem, 4vw, 2.5rem);
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        position: relative;
-        margin-bottom: 0.8rem;
-      }
-
-      .cta-text {
-        font-size: clamp(0.85rem, 1.5vw, 1.05rem);
-        color: var(--text-secondary);
-        position: relative;
-        margin-bottom: 1.5rem;
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      /* ========== FOOTER ========== */
-      .footer {
-        padding: clamp(1.5rem, 3vw, 3rem) 0;
-        border-top: 1px solid var(--border-subtle);
-        color: var(--text-secondary);
-        font-size: 0.8rem;
+      .btn-primary,
+      .btn-outline {
         width: 100%;
+        text-align: center;
       }
+    }
 
-      .footer-bottom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: var(--text-muted);
-        font-size: 0.75rem;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        width: 100%;
-        padding: 20px;
+    .search-highlight {
+      background: #d97706;
+      color: #fff;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    ::selection {
+      background: #78716c;
+      color: #fff;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+
+    .hero-badge:hover {
+      opacity: 0.8;
+    }
+
+    .nav-brand-text:hover {
+      font-style: italic;
+      transition: font-style 0.2s ease;
+      cursor: none;
+    }
+
+    .hero-badge:hover .hero-badge-dot {
+      animation: none;
+      opacity: 0.2;
+      cursor: none;
+    }
+
+    .nav-brand-text.blinking {
+      animation: blinkRed 1.5s infinite;
+    }
+
+    @keyframes blinkRed {
+      0%,
+      100% {
+        color: var(--text-primary);
       }
-
-      /* ========== RESPONSIVE ========== */
-      @media (max-width: 768px) {
-        .container {
-          padding: 0 1rem;
-        }
-
-        .navbar {
-          padding: 0.8rem 1rem;
-        }
-
-        .hero-section {
-          grid-template-columns: 1fr;
-          gap: 1.5rem;
-          padding: 2rem 0;
-        }
-
-        .hero-image-grid {
-          max-width: 100%;
-          order: -1;
-        }
-
-        .hero-visual {
-          order: -1;
-        }
-
-        .projects-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .search-input {
-          width: 140px;
-          font-size: 0.8rem;
-        }
-
-        .search-input:focus {
-          width: 160px;
-        }
-
-        .btn-primary,
-        .btn-outline {
-          padding: 0.65rem 1.4rem;
-          font-size: 0.8rem;
-        }
+      50% {
+        color: #555;
       }
+    }
 
-      @media (max-width: 480px) {
-        .navbar {
-          padding: 0.7rem 0.8rem;
-        }
+    .emoji-bw {
+      filter: grayscale(100%) contrast(1.2);
+    }
 
-        .nav-brand {
-          gap: 0.5rem;
-          cursor: none;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+      cursor: none;
+    }
 
-        .nav-logo {
-          width: 28px;
-          height: 28px;
-          min-width: 28px;
-        }
+    body,
+    .navbar,
+    .project-card,
+    .cta-section,
+    .search-input,
+    .hero-badge,
+    .tag,
+    .btn-primary,
+    .btn-outline {
+      transition: background-color 0.5s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+  </style>
+</head>
 
-        .search-input {
-          width: 120px;
-          padding: 0.5rem 0.8rem 0.5rem 2rem;
-          font-size: 0.75rem;
-        }
-
-        .search-input:focus {
-          width: 140px;
-        }
-
-        .search-icon {
-          left: 0.6rem;
-          width: 14px;
-          height: 14px;
-        }
-
-        .hero-cta {
-          flex-direction: column;
-          gap: 0.6rem;
-        }
-
-        .btn-primary,
-        .btn-outline {
-          width: 100%;
-          text-align: center;
-        }
-      }
-
-      .search-highlight {
-        background: #555;
-        color: #fff;
-        padding: 0 2px;
-        border-radius: 2px;
-      }
-      ::selection {
-        background: #555;
-        color: #fff;
-        padding: 0 2px;
-        border-radius: 2px;
-      }
-      .hero-badge:hover {
-        opacity: 0.8;
-      }
-
-      .nav-brand-text:hover {
-        font-style: italic;
-        transition: font-style 0.2s ease;
-        cursor: none;
-      }
-
-      .hero-badge:hover .hero-badge-dot {
-        animation: none;
-        opacity: 0.2;
-        cursor: none;
-      }
-      .nav-brand-text.blinking {
-        animation: blinkRed 1.5s infinite;
-      }
-
-      @keyframes blinkRed {
-        0%,
-        100% {
-          color: var(--text-primary);
-        }
-        50% {
-          color: #555;
-        }
-      }
-
-      .emoji-bw {
-        filter: grayscale(100%) contrast(1.2);
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-        cursor: none;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="cursor-dot"></div>
-    <nav class="navbar">
-      <a href="#" class="nav-brand">
-        <div class="nav-logo"></div>
-        <span class="nav-brand-text">nithiiieeee</span>
-      </a>
-      <div class="nav-actions">
-        <div class="search-wrap">
-          <svg
-            class="search-icon"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
-          <input
-            type="search"
-            id="searchInput"
-            class="search-input"
-            placeholder="Search work..."
-            autocomplete="off"
-          />
-        </div>
+<body>
+  <div class="cursor-dot"></div>
+  <nav class="navbar">
+    <a href="#" class="nav-brand">
+      <div class="nav-logo"></div>
+      <span class="nav-brand-text">nithiiieeee</span>
+    </a>
+    <div class="nav-actions">
+      <div class="search-wrap">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input type="search" id="searchInput" class="search-input" placeholder="search" autocomplete="off" />
       </div>
-    </nav>
-
-    <div class="container">
-      <section class="hero-section">
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            JustABoy
-          </div>
-          <h1 class="hero-title">A person who <span>thinks</span></h1>
-          <p class="hero-text" id="heroText">
-            Doing things that replaces boredom with wonder.
-          </p>
-          <div class="hero-cta">
-            <button class="btn-primary">. . .</button>
-            <button class="btn-outline">
-              <span class="emoji-bw">+</span>
-            </button>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="hero-image-grid">
-            <div class="hero-img-large">
-              <img
-                src="https://www.shutterstock.com/image-photo/serenity-summer-day-durmitor-national-600nw-2623341111.jpg"
-                height="120%"
-                alt="Hero"
-                class="hero-img"
-                onerror="this.style.display = 'none'"
-              />
-              <div class="image-placeholder">◈</div>
-            </div>
-            <div class="hero-img-ocean">
-              <img
-                src="https://storage.needpix.com/rsynced_images/sea-1547609_1280.jpg"
-                height="100%"
-                alt="Hero"
-                class="hero-img"
-                onerror="this.style.display = 'none'"
-              />
-              <div class="image-placeholder">◉</div>
-            </div>
-            <div class="hero-img-car">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXQeddPi1ZsF_C99HZY8SKRiIAz1jm8dA7hg&s"
-                height="100%"
-                alt="Hero"
-                class="hero-img"
-                onerror="this.style.display = 'none'"
-              />
-              <div class="image-placeholder">◐</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="section-header">
-          <div class="section-title-group">
-            <span class="section-label">Portfolio</span>
-            <h2 class="section-title">Works</h2>
-          </div>
-        </div>
-        <div class="projects-grid" id="projectsGrid">
-          
-          <div class="project-card" data-search="aboutme" data-link="https://nithiiieeee.github.io/aboutme">
-            <div class="card-image">
-              <img src="https://raw.githubusercontent.com/nithiiieeee/aboutme/refs/heads/main/img/1.jpg" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';" />
-              <div class="image-placeholder">◈</div>
-            </div>
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="card-category">website</span>
-                <span class="card-year">2026-07-27</span>
-              </div>
-              <h3 class="card-title">About Me</h3>
-              <p class="card-description">A website about me :)</p>
-              <div class="card-tags">
-                <span class="tag">html</span>
-                <span class="tag">css</span>
-                <span class="tag">java</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card" data-search="ren" data-link="https://radioren.netlify.app">
-            <div class="card-image">
-              <img src="https://media1.tenor.com/m/iedLCcqQp_MAAAAd/relaxing.gif" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';" />
-              <div class="image-placeholder">◈</div>
-            </div>
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="card-category">website</span>
-                <span class="card-year">2026-08-03</span>
-              </div>
-              <h3 class="card-title">Ren</h3>
-              <p class="card-description">Lofi beats with additional features</p>
-              <div class="card-tags">
-                <span class="tag">html</span>
-                <span class="tag">css</span>
-                <span class="tag">java</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <section class="cta-section">
-        <h2 class="cta-title">Get in Touch</h2>
-        <p class="cta-text">
-          Interested in collaborating or just want to say hi ? Feel free to
-          reach out.
-        </p>
-        <a href="mailto:dreadful-had-rake@duck.com" class="btn-primary"
-          >Contact</a
-        >
-      </section>
     </div>
+  </nav>
 
-    <footer class="footer container">
-      <div class="footer-bottom">
-        <span
-          ><a
-            href="https://en.wikipedia.org/wiki/Copyright_symbol"
-            target="_blank"
-            >©</a
-          >
-          <a href="https://en.wikipedia.org/wiki/2026" target="_blank">2026</a>
-          <a href="https://instagram.com/nithiiieeee" target="_blank"
-            >nithiiieeee</a
-          ></span
-        >
+  <div class="container">
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          #bored
+        </div>
+        <h1 class="hero-title">A person who <span>thinks</span></h1>
+        <p class="hero-text" id="heroText">
+          Doing things that replaces boredom with wonder.
+        </p>
+        <div class="hero-cta">
+          <button class="btn-primary" id="themeToggleBtn"><i class="ph ph-repeat"></i></button>
+        </div>
       </div>
-    </footer>
+      <div class="hero-visual">
+        <div class="hero-image-grid">
+          <div class="hero-img-large">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgCDZz5L6kzfz6C__9G3ntNiEun3RLnedZvSu20Nw-Pw&s=10"
+              alt="Hero" class="hero-img" onerror="this.style.display = 'none'" />
+            <div class="image-placeholder">◈</div>
+          </div>
+          <div class="hero-img-ocean">
+            <img src="https://i.ytimg.com/vi/oVstDdetBck/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLC7tp_OKWYns7GVnGnYQLBAYXEvfQ" alt="Hero"
+              class="hero-img" onerror="this.style.display = 'none'" />
+            <div class="image-placeholder">◉</div>
+          </div>
+          <div class="hero-img-car">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUyc8z1HjbHnK-xTgZ_LuHyeXV6BrqGaZ_In7R04Eo5KV0Fz6Q_HjrffJM&s=10"
+              alt="Hero" class="hero-img" onerror="this.style.display = 'none'" />
+            <div class="image-placeholder">◐</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.getElementById("searchInput");
-        const cards = document.querySelectorAll(".project-card");
-        const grid = document.getElementById("projectsGrid");
+    <section>
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-label">Portfolio</span>
+          <h2 class="section-title">Works</h2>
+        </div>
+      </div>
+      <div class="projects-grid" id="projectsGrid">
 
-        // Click handler for project cards
-        cards.forEach(function (card) {
-          card.addEventListener("click", function () {
-            const link = card.getAttribute("data-link");
-            if (link) {
-              window.open(link, "_blank");
-            }
-          });
-        });
+        <div class="project-card" data-search="aboutme" data-link="https://nithiiieeee.github.io/aboutme">
+          <div class="card-image">
+            <img src="https://raw.githubusercontent.com/nithiiieeee/aboutme/refs/heads/main/img/1.jpg"
+              onerror="this.style.display='none';" />
+            <div class="image-placeholder">◈</div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-category">website</span>
+              <span class="card-year">2026-07-27</span>
+            </div>
+            <h3 class="card-title">About Me</h3>
+            <p class="card-description">A website about me :)</p>
+            <div class="card-tags">
+              <span class="tag">html</span>
+              <span class="tag">css</span>
+              <span class="tag">java</span>
+            </div>
+          </div>
+        </div>
 
-        // Ocean box setup
-        const oceanBox = document.querySelector(".hero-img-ocean");
-        const oceanBoxOriginalHTML = oceanBox ? oceanBox.innerHTML : "";
-        let oceanVideoMode = false;
-        let oceanVideoElement = null;
+        <div class="project-card" data-search="ren" data-link="https://radioren.netlify.app">
+          <div class="card-image">
+            <img src="https://media1.tenor.com/m/iedLCcqQp_MAAAAd/relaxing.gif"
+              onerror="this.style.display='none';" />
+            <div class="image-placeholder">◈</div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-category">website</span>
+              <span class="card-year">2026-08-03</span>
+            </div>
+            <h3 class="card-title">Ren</h3>
+            <p class="card-description">Lofi beats with additional features</p>
+            <div class="card-tags">
+              <span class="tag">html</span>
+              <span class="tag">css</span>
+              <span class="tag">java</span>
+            </div>
+          </div>
+        </div>
 
-        function exitOceanVideoMode() {
-          if (oceanVideoElement) {
-            oceanVideoElement.pause();
-            oceanVideoElement.remove();
-            oceanVideoElement = null;
-          }
-          if (oceanBox) oceanBox.innerHTML = oceanBoxOriginalHTML;
-          oceanVideoMode = false;
-        }
+      </div>
+    </section>
 
-        function enterOceanVideoMode() {
-          if (videoMode && videoElement) {
-            videoElement.pause();
-          }
-          if (!oceanBox) return;
-          oceanBox.innerHTML = "";
-          oceanVideoElement = document.createElement("video");
-          oceanVideoElement.src = "justaboy.mp4";
-          oceanVideoElement.style.width = "100%";
-          oceanVideoElement.style.height = "100%";
-          oceanVideoElement.style.objectFit = "cover";
-          oceanVideoElement.loop = false;
-          oceanVideoElement.playsInline = true;
-          oceanBox.appendChild(oceanVideoElement);
-          oceanVideoElement.play().catch(function () {});
-          oceanVideoMode = true;
-        }
+    <section class="cta-section">
+      <h2 class="cta-title">Get in Touch</h2>
+      <p class="cta-text">
+        Interested in collaborating or just want to say hi ? Feel free to
+        reach out.
+      </p>
+      <a href="mailto:dreadful-had-rake@duck.com" class="btn-primary">Contact</a>
+    </section>
+  </div>
 
-        // Car box setup
-        const carBox = document.querySelector(".hero-img-car");
-        const carBoxOriginalHTML = carBox ? carBox.innerHTML : "";
-        let videoMode = false;
-        let videoElement = null;
+  <footer class="footer container">
+    <div class="footer-bottom">
+      <span><a href="https://en.wikipedia.org/wiki/Copyright_symbol" target="_blank">©</a>
+        <a href="https://en.wikipedia.org/wiki/2026" target="_blank">2026</a>
+        <a href="https://instagram.com/nithiiieeee" target="_blank">nithiiieeee</a></span>
+    </div>
+  </footer>
 
-        function exitVideoMode() {
-          if (videoElement) {
-            videoElement.pause();
-            videoElement.remove();
-            videoElement = null;
-          }
-          if (carBox) carBox.innerHTML = carBoxOriginalHTML;
-          videoMode = false;
-          const brandText = document.querySelector(".nav-brand-text");
-          if (brandText) brandText.classList.remove("blinking");
-        }
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("searchInput");
+      const cards = document.querySelectorAll(".project-card");
+      const grid = document.getElementById("projectsGrid");
+      const themeToggleBtn = document.getElementById("themeToggleBtn");
+      const htmlElement = document.documentElement;
 
-        function enterVideoMode() {
-          if (oceanVideoMode && oceanVideoElement) {
-            oceanVideoElement.pause();
-          }
-          if (!carBox) return;
-          carBox.innerHTML = "";
-          videoElement = document.createElement("video");
-          videoElement.src = "lettheworldburn.mp4";
-          videoElement.style.width = "100%";
-          videoElement.style.height = "100%";
-          videoElement.style.objectFit = "cover";
-          videoElement.loop = false;
-          videoElement.playsInline = true;
-          carBox.appendChild(videoElement);
-          videoElement.play().catch(function () {});
-          videoMode = true;
-          const brandText = document.querySelector(".nav-brand-text");
-          if (brandText) brandText.classList.add("blinking");
-
-          videoElement.addEventListener("ended", function () {
-            if (brandText) brandText.classList.remove("blinking");
-          });
-        }
-
-        // Large image (GIF) setup
-        const largeBox = document.querySelector(".hero-img-large");
-        const largeBoxOriginalHTML = largeBox ? largeBox.innerHTML : "";
-        let gifPlaying = false;
-
-        if (largeBox) {
-          largeBox.addEventListener("click", function (e) {
-            e.stopPropagation();
-            if (gifPlaying) return;
-
-            gifPlaying = true;
-            largeBox.innerHTML = "";
-            largeBox.style.position = "relative";
-            largeBox.style.overflow = "hidden";
-
-            const gifElement = document.createElement("img");
-            gifElement.src = "mr.bean.gif";
-            gifElement.style.width = "100%";
-            gifElement.style.height = "auto";
-            gifElement.style.position = "absolute";
-            gifElement.style.top = "0";
-            gifElement.style.left = "0";
-            largeBox.appendChild(gifElement);
-
-            const gifDuration = 3000;
-            setTimeout(function () {
-              largeBox.innerHTML = largeBoxOriginalHTML;
-              largeBox.style.position = "";
-              largeBox.style.overflow = "";
-              gifPlaying = false;
-            }, gifDuration);
-          });
-        }
-
-        // Badge click - toggles ocean video mode
-        const badge = document.querySelector(".hero-badge");
-        if (badge) {
-          badge.addEventListener("click", function () {
-            if (oceanVideoMode) {
-              exitOceanVideoMode();
-            } else {
-              enterOceanVideoMode();
-            }
-          });
-        }
-
-        // Brand text click - toggles car video mode
-        const brandText = document.querySelector(".nav-brand-text");
-        if (brandText) {
-          brandText.addEventListener("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (videoMode) {
-              exitVideoMode();
-            } else {
-              enterVideoMode();
-            }
-          });
-        }
-
-        // Hover to reveal Easter egg hint
-        const heroText = document.getElementById("heroText");
-        const originalText = heroText.textContent;
-        const secretText =
-          "There are 2 easter eggs in this website. Find them.";
-
-        heroText.addEventListener("mouseenter", function () {
-          heroText.textContent = secretText;
-          heroText.style.color = "#555";
-          heroText.style.transition = "color 0.3s ease";
-        });
-
-        heroText.addEventListener("mouseleave", function () {
-          heroText.textContent = originalText;
-          heroText.style.color = "";
-        });
-
-        // Search functionality
-        function clearHighlights() {
-          document.querySelectorAll(".search-highlight").forEach(function (el) {
-            const parent = el.parentNode;
-            parent.replaceChild(document.createTextNode(el.textContent), el);
-            parent.normalize();
-          });
-        }
-
-        function highlightInElement(el, query) {
-          if (!query) return;
-          const regex = new RegExp(
-            "(" + query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")",
-            "gi",
-          );
-          el.innerHTML = el.innerHTML.replace(
-            regex,
-            '<mark class="search-highlight">$1</mark>',
-          );
-        }
-
-        searchInput.addEventListener("input", function () {
-          const q = searchInput.value.toLowerCase().trim();
-          clearHighlights();
-          let visibleCount = 0;
-
-          cards.forEach(function (card) {
-            const searchData = card.getAttribute("data-search");
-            if (!searchData) return;
-
-            if (!q || searchData.toLowerCase().includes(q)) {
-              card.style.display = "";
-              visibleCount++;
-
-              if (q) {
-                const title = card.querySelector(".card-title");
-                const desc = card.querySelector(".card-description");
-                const category = card.querySelector(".card-category");
-                const tags = card.querySelectorAll(".tag");
-
-                highlightInElement(title, q);
-                highlightInElement(desc, q);
-                highlightInElement(category, q);
-                tags.forEach(function (tag) {
-                  highlightInElement(tag, q);
-                });
-              }
-            } else {
-              card.style.display = "none";
-            }
-          });
-
-          let noResults = grid.querySelector(".no-results");
-          if (visibleCount === 0 && q) {
-            if (!noResults) {
-              noResults = document.createElement("div");
-              noResults.className = "no-results";
-              noResults.textContent = "No projects match your search.";
-              grid.appendChild(noResults);
-            }
-          } else if (noResults) {
-            noResults.remove();
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("click", function () {
+          if (htmlElement.getAttribute("data-theme") === "light") {
+            htmlElement.removeAttribute("data-theme");
+            localStorage.setItem("theme", "dark");
+          } else {
+            htmlElement.setAttribute("data-theme", "light");
+            localStorage.setItem("theme", "light");
           }
         });
+      }
 
-        // Custom cursor
-        document.addEventListener("mousemove", function (e) {
-          const dot = document.querySelector(".cursor-dot");
-          if (dot) {
-            dot.style.left = e.clientX + "px";
-            dot.style.top = e.clientY + "px";
+      // Click handler for project cards
+      cards.forEach(function (card) {
+        card.addEventListener("click", function () {
+          const link = card.getAttribute("data-link");
+          if (link) {
+            window.open(link, "_blank");
           }
-        });
-
-        // Whoosh sound on fast cursor movement
-        let lastX = 0,
-          lastY = 0,
-          lastTime = Date.now();
-        let whooshCooldown = false;
-
-        document.addEventListener("mousemove", function (e) {
-          const now = Date.now();
-          const dt = now - lastTime;
-          if (dt < 20) return;
-
-          const dx = e.clientX - lastX;
-          const dy = e.clientY - lastY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          const speed = distance / dt;
-
-          lastX = e.clientX;
-          lastY = e.clientY;
-          lastTime = now;
-
-          if (speed > 10 && !whooshCooldown) {
-            whooshCooldown = true;
-            const whoosh = new Audio("whoosh.mp3");
-            whoosh.volume = 1.0;
-            whoosh.play().catch(function () {});
-            setTimeout(function () {
-              whooshCooldown = false;
-            }, 200);
-          }
-        });
-
-        // Ocean box click
-        if (oceanBox) {
-          oceanBox.addEventListener("click", function (e) {
-            e.stopPropagation();
-            if (oceanVideoMode && oceanVideoElement) {
-              if (oceanVideoElement.paused) {
-                oceanVideoElement.play().catch(function () {});
-              } else {
-                oceanVideoElement.pause();
-              }
-            } else {
-              new Audio("ocean.mp3").play().catch(function () {});
-            }
-          });
-        }
-
-        // Car box click
-        if (carBox) {
-          carBox.addEventListener("click", function (e) {
-            e.stopPropagation();
-            if (videoMode && videoElement) {
-              if (videoElement.paused) {
-                videoElement.play().catch(function () {});
-              } else {
-                videoElement.pause();
-              }
-            } else {
-              new Audio("carstarting.mp3").play().catch(function () {});
-            }
-          });
-        }
-
-        // Click sound on everything else
-        document.addEventListener("click", function (e) {
-          if (carBox && carBox.contains(e.target)) return;
-          if (oceanBox && oceanBox.contains(e.target)) return;
-          if (largeBox && largeBox.contains(e.target)) return;
-          new Audio("click.mp3").play().catch(function () {});
         });
       });
-    </script>
-  </body>
+
+      // Search functionality
+      function clearHighlights() {
+        document.querySelectorAll(".search-highlight").forEach(function (el) {
+          const parent = el.parentNode;
+          parent.replaceChild(document.createTextNode(el.textContent), el);
+          parent.normalize();
+        });
+      }
+
+      function highlightInElement(el, query) {
+        if (!query) return;
+        const regex = new RegExp(
+          "(" + query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")",
+          "gi",
+        );
+        el.innerHTML = el.innerHTML.replace(
+          regex,
+          '<mark class="search-highlight">$1</mark>',
+        );
+      }
+
+      searchInput.addEventListener("input", function () {
+        const q = searchInput.value.toLowerCase().trim();
+        clearHighlights();
+        let visibleCount = 0;
+
+        cards.forEach(function (card) {
+          const searchData = card.getAttribute("data-search");
+          if (!searchData) return;
+
+          if (!q || searchData.toLowerCase().includes(q)) {
+            card.style.display = "";
+            visibleCount++;
+
+            if (q) {
+              const title = card.querySelector(".card-title");
+              const desc = card.querySelector(".card-description");
+              const category = card.querySelector(".card-category");
+              const tags = card.querySelectorAll(".tag");
+
+              highlightInElement(title, q);
+              highlightInElement(desc, q);
+              highlightInElement(category, q);
+              tags.forEach(function (tag) {
+                highlightInElement(tag, q);
+              });
+            }
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        let noResults = grid.querySelector(".no-results");
+        if (visibleCount === 0 && q) {
+          if (!noResults) {
+            noResults = document.createElement("div");
+            noResults.className = "no-results";
+            noResults.textContent = "No projects match your search.";
+            grid.appendChild(noResults);
+          }
+        } else if (noResults) {
+          noResults.remove();
+        }
+      });
+    });
+
+    document.addEventListener("mousemove", function (e) {
+      const dot = document.querySelector(".cursor-dot");
+      if (dot) {
+        dot.style.left = e.clientX + "px";
+        dot.style.top = e.clientY + "px";
+      }
+    });
+  </script>
+</body>
+
 </html>
