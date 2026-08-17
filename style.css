@@ -1,0 +1,839 @@
+:root {
+  --bg-black: #0c0d0e;
+  --brand-red: #a91d1d;
+  --brand-red-dark: #8c1616;
+  --text-white: #f5f5f5;
+  --text-dim: #a6a6a8;
+  --border-line: rgba(255, 255, 255, 0.25);
+  
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  --slide-count: 6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-black);
+  color: var(--text-white);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =======================================================
+   PRESENTATION WRAPPER
+   ======================================================= */
+.presentation-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =======================================================
+   FIXED UI CHROME
+   ======================================================= */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: clamp(1rem, 2.5vh, 2rem) clamp(1.2rem, 4vw, 3.5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(12, 13, 14, 0.9) 0%, transparent 100%);
+}
+
+.header-name {
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  text-transform: uppercase;
+  pointer-events: auto;
+}
+
+.header-nav {
+  display: flex;
+  gap: clamp(1.2rem, 2.5vw, 2.5rem);
+  pointer-events: auto;
+}
+
+.header-nav button {
+  background: none;
+  border: none;
+  color: var(--text-white);
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.header-nav button::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--brand-red);
+  transition: width 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.header-nav button:hover::after {
+  width: 100%;
+}
+
+.header-nav button:hover {
+  color: var(--brand-red);
+}
+
+.mobile-menu-btn {
+  display: none;
+  pointer-events: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 28px;
+  height: 20px;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 102;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-white);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.site-footer-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: clamp(0.8rem, 2vh, 1.8rem) clamp(1.2rem, 4vw, 3.5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(12, 13, 14, 0.9) 0%, transparent 100%);
+}
+
+.footer-role, .footer-year {
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.footer-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  pointer-events: auto;
+}
+
+.footer-controls button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-white);
+  padding: 0.25rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.footer-controls button:hover {
+  border-color: var(--brand-red);
+  background: var(--brand-red);
+  color: #fff;
+  transform: scale(1.06);
+}
+
+#slideCounter {
+  font-family: var(--font-sans);
+  font-size: clamp(0.78rem, 1vw, 0.88rem);
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+/* =======================================================
+   HORIZONTAL SLIDER TRACK (6 Slides Total)
+   ======================================================= */
+.horizontal-slider {
+  width: calc(100vw * var(--slide-count));
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.slide-frame {
+  width: 100vw;
+  min-width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(4rem, 8vh, 6rem) clamp(1.5rem, 5vw, 4.5rem);
+  flex-shrink: 0;
+  perspective: 1200px;
+}
+
+/* 16:9 Presentation Canvas Container */
+.slide-canvas {
+  width: min(88vw, calc(74vh * (16 / 9)));
+  height: min(calc(88vw * (9 / 16)), 74vh);
+  max-width: 1440px;
+  position: relative;
+  display: flex;
+  background: var(--bg-black);
+}
+
+/* =======================================================
+   TYPOGRAPHY
+   ======================================================= */
+.script-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--brand-red);
+  letter-spacing: -0.02em;
+}
+
+.inline-script-title {
+  font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+  line-height: 1.05;
+}
+
+.slide-body-p {
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  line-height: 1.65;
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+/* =======================================================
+   ANIMATION & STAGGER SYSTEM
+   ======================================================= */
+.slide-frame .anim-fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-frame .anim-scale-img {
+  opacity: 0;
+  transform: scale(0.94) translateY(15px);
+  transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-frame.is-active .anim-fade-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-frame.is-active .anim-scale-img {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.delay-1 { transition-delay: 0.1s !important; }
+.delay-2 { transition-delay: 0.22s !important; }
+.delay-3 { transition-delay: 0.34s !important; }
+.delay-4 { transition-delay: 0.46s !important; }
+
+/* =======================================================
+   SLIDE 1: HERO
+   ======================================================= */
+.hero-slide {
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-photo-stack {
+  position: relative;
+  width: clamp(220px, 25vw, 360px);
+  aspect-ratio: 1 / 1;
+  z-index: 1;
+}
+
+.stack-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  transform-origin: center center;
+}
+
+.stack-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-frame:not(.is-active) .card-3 { transform: rotate(0deg) scale(0.85); opacity: 0; }
+.slide-frame:not(.is-active) .card-2 { transform: rotate(0deg) scale(0.9); opacity: 0; }
+.slide-frame:not(.is-active) .card-1 { transform: rotate(0deg) scale(0.95); opacity: 0; }
+
+.slide-frame.is-active .card-3 { transform: rotate(18deg) translate(8%, 3%) scale(1); opacity: 1; transition-delay: 0.15s; }
+.slide-frame.is-active .card-2 { transform: rotate(8deg) translate(4%, -2%) scale(1); opacity: 1; transition-delay: 0.25s; }
+.slide-frame.is-active .card-1 { transform: rotate(-8deg) translate(0, 0) scale(1); opacity: 1; transition-delay: 0.35s; }
+
+.hero-title-wrap {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 2vw;
+  font-size: clamp(3.8rem, 11vw, 10rem);
+  line-height: 0.85;
+}
+
+.word-creative, .word-portfolio {
+  display: inline-block;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+}
+
+.slide-frame:not(.is-active) .word-creative { transform: translateX(-50px); opacity: 0; }
+.slide-frame.is-active .word-creative { transform: translateX(0); opacity: 1; transition-delay: 0.2s; }
+
+.slide-frame:not(.is-active) .word-portfolio { transform: translateX(50px); opacity: 0; }
+.slide-frame.is-active .word-portfolio { transform: translateX(0); opacity: 1; transition-delay: 0.3s; }
+
+.hero-sparkle {
+  position: absolute;
+  right: 10%;
+  top: 26%;
+  width: clamp(45px, 6vw, 75px);
+  height: clamp(45px, 6vw, 75px);
+  z-index: 5;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+}
+
+.slide-frame:not(.is-active) .hero-sparkle { transform: scale(0) rotate(-180deg); opacity: 0; }
+.slide-frame.is-active .hero-sparkle {
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+  transition-delay: 0.5s;
+  animation: sparkleGlow 4s infinite ease-in-out 1.2s;
+}
+
+.hero-sparkle svg { width: 100%; height: 100%; }
+
+/* =======================================================
+   SLIDES 2 & 5: TOC / WORKS LIST LAYOUT
+   ======================================================= */
+.toc-slide {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.3fr;
+  gap: 3vw;
+  align-items: center;
+}
+
+.toc-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80%;
+}
+
+.toc-intro {
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+
+.side-script-title {
+  font-size: clamp(2.8rem, 5vw, 5rem);
+}
+
+.toc-center { width: 100%; }
+
+.toc-list {
+  list-style: none;
+  width: 100%;
+}
+
+.toc-list li {
+  border-bottom: 1px solid var(--border-line);
+}
+
+.toc-list li:first-child {
+  border-top: 1px solid var(--border-line);
+}
+
+/* Styled for both buttons (Slide 2) and anchor hyperlinks (Slide 5) */
+.toc-list button,
+.toc-list a {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2vh 0;
+  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+  color: var(--text-white);
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.toc-list button:hover,
+.toc-list a:hover {
+  color: var(--brand-red);
+  transform: translateX(8px);
+}
+
+.toc-right-image {
+  height: 90%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.toc-right-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =======================================================
+   SLIDE 3: ABOUT ME
+   ======================================================= */
+.about-slide {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 1fr;
+  gap: 2.5vw;
+  align-items: center;
+}
+
+.about-left-col, .about-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vh;
+}
+
+.about-center-img {
+  height: 90%;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.about-center-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.red-box-img {
+  background-color: var(--brand-red);
+  padding: 1.5vw;
+  border-radius: 3px;
+}
+
+.red-box-img img {
+  width: 100%;
+  height: 18vh;
+  object-fit: cover;
+}
+
+/* =======================================================
+   SLIDE 4: PHILOSOPHY
+   ======================================================= */
+.philosophy-slide {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 1.2fr;
+  gap: 2.5vw;
+  align-items: center;
+}
+
+.section-script-header {
+  font-size: clamp(2.4rem, 4vw, 4rem);
+}
+
+.phil-quote-text {
+  margin-top: 1vh;
+}
+
+.phil-img-wrap-bottom {
+  margin-top: 2vh;
+  height: 16vh;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.phil-img-cat { height: 35vh; overflow: hidden; border-radius: 3px; }
+.phil-img-portrait { height: 18vh; overflow: hidden; border-radius: 3px; }
+.phil-desc { margin: 1.5vh 0; }
+.phil-img-decor { height: 18vh; overflow: hidden; border-radius: 3px; }
+
+.phil-img-wrap-bottom img,
+.phil-img-cat img,
+.phil-img-portrait img,
+.phil-img-decor img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =======================================================
+   SLIDE 6: CONTACT
+   ======================================================= */
+.contact-slide {
+  display: grid;
+  grid-template-columns: 1.1fr 1.2fr;
+  align-items: stretch;
+}
+
+.contact-left-half {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 2vw;
+}
+
+.contact-title { font-size: clamp(2.8rem, 4.8vw, 4.8rem); }
+.contact-sub { margin: 1vh 0 2.5vh 0; font-size: clamp(0.85rem, 1.1vw, 1rem); color: var(--text-dim); }
+
+.contact-details-box {
+  border-left: 1.5px solid #fff;
+  padding-left: 1.5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vh;
+}
+
+.contact-line {
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  color: var(--text-white);
+  text-decoration: none;
+  transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.contact-line:hover { 
+  opacity: 1; 
+  color: var(--brand-red);
+  transform: translateX(6px);
+}
+
+.contact-right-half {
+  background-color: var(--brand-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5vw;
+  border-radius: 3px;
+}
+
+.contact-img-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.contact-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =======================================================
+   MOBILE & VERTICAL SCREENS (Clean Native Flow)
+   ======================================================= */
+@media (max-width: 900px) {
+  html, body {
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    touch-action: pan-y !important;
+    height: auto !important;
+  }
+
+  .presentation-wrapper {
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
+    display: block;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .header-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75vw;
+    max-width: 300px;
+    height: 100vh;
+    background: rgba(12, 13, 14, 0.98);
+    backdrop-filter: blur(15px);
+    flex-direction: column;
+    padding: 6rem 2.5rem;
+    gap: 2rem;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 101;
+  }
+
+  .header-nav.active {
+    right: 0;
+  }
+
+  .mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .mobile-menu-btn.active span:nth-child(2) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  .horizontal-slider {
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: column !important;
+    transform: none !important;
+    transition: none !important;
+    display: block;
+  }
+
+  .slide-frame {
+    width: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    min-height: 100vh;
+    padding: 5.5rem 1.5rem 3.5rem 1.5rem !important;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .slide-canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    aspect-ratio: auto !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Slide 1: Hero */
+  .hero-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+  }
+
+  .hero-title-wrap {
+    position: relative !important;
+    width: 100%;
+    order: 1;
+    margin-bottom: 2rem;
+    text-align: center;
+    pointer-events: auto;
+  }
+
+  .hero-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0;
+    font-size: clamp(2.8rem, 12vw, 4.2rem);
+    line-height: 1;
+  }
+
+  .slide-frame:not(.is-active) .word-creative,
+  .slide-frame:not(.is-active) .word-portfolio {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  .slide-frame.is-active .word-creative,
+  .slide-frame.is-active .word-portfolio {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .hero-photo-stack {
+    order: 2;
+    width: clamp(220px, 65vw, 290px);
+    height: clamp(220px, 65vw, 290px);
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-sparkle {
+    right: 5%;
+    top: 0%;
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Slides 2 & 5: TOC / Works */
+  .toc-slide {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .toc-left {
+    height: auto;
+    gap: 1rem;
+  }
+
+  .toc-right-image {
+    display: none;
+  }
+
+  /* Slide 3: About */
+  .about-slide {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-center-img {
+    height: 280px;
+  }
+
+  .red-box-img img {
+    height: 180px;
+  }
+
+  /* Slide 4: Philosophy */
+  .philosophy-slide {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .phil-img-cat {
+    display: none;
+  }
+
+  .phil-img-wrap-bottom, .phil-img-portrait, .phil-img-decor {
+    height: 200px;
+  }
+
+  /* Slide 6: Contact */
+  .contact-slide {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-right-half {
+    padding: 1.5rem;
+    height: 280px;
+  }
+
+  .footer-controls {
+    display: none;
+  }
+}
+
+/* =======================================================
+   HOLD-TO-SPIN & CLICK-SPIN IMAGE INTERACTION
+   ======================================================= */
+.slide-canvas img {
+  cursor: pointer;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Continuous smooth infinite spinning while held down */
+.slide-canvas img.is-holding {
+  animation: continuousSpin 0.75s linear infinite !important;
+}
+
+/* Single 360-degree trigger spin */
+.slide-canvas img.is-spinning {
+  animation: fullSpin 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes continuousSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fullSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =======================================================
+   EASTER EGG: STAR SPARKLE TOGGLE
+   ======================================================= */
+.hero-sparkle {
+  cursor: pointer;
+  pointer-events: auto !important;
+}
+
+.hero-sparkle:hover {
+  transform: scale(1.2) rotate(15deg);
+}
+
+/* Hyper-spin & Red Glow on the Star when Easter Egg is Active */
+.hero-sparkle.easter-egg-active {
+  animation: eggStarSpin 0.6s linear infinite !important;
+}
+
+@keyframes eggStarSpin {
+  from {
+    transform: rotate(0deg) scale(1.15);
+  }
+  to {
+    transform: rotate(360deg) scale(1.15);
+  }
+}
